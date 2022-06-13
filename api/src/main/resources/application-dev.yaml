@@ -1,0 +1,12 @@
+spring:
+  redis:
+    host: 175.178.118.202
+    password: Aer9spie!
+    port: 6379
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://175.178.118.202:3306/gym?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    username: root
+    password: Aer9spie!
+
+
