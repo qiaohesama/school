@@ -14,7 +14,6 @@ import org.springframework.stereotype.Repository;
  * @since 2022-06-13
  */
 @Mapper
-@Repository
 public interface GymReserveBaseMapper extends BaseMapper<GymReserveDO> {
 
 }
