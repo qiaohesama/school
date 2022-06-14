@@ -12,7 +12,7 @@ import java.util.List;
 
 public class CodeGenerator {
     public static void main(String[] args) {
-        FastAutoGenerator.create(new DataSourceConfig.Builder("jdbc:mysql://47.104.107.7:3306/nanjing?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai", "dev", "OPS@ufunxm.com")
+        FastAutoGenerator.create(new DataSourceConfig.Builder("jdbc:mysql://175.178.118.202:3306/gym?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai", "root", "Aer9spie!")
                         .typeConvert(new MySqlTypeConvert()) // 类型转换
                         .keyWordsHandler(new MySqlKeyWordsHandler()) // 关键字加``
                 )
