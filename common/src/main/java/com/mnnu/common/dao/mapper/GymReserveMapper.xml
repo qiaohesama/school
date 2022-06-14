@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mnnu.common.dao.GymReserveBaseMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.mnnu.common.entity.domain.GymReserveDO">
+        <id column="order_id" property="orderId" />
+        <result column="user_id" property="userId" />
+        <result column="venue_id" property="venueId" />
+        <result column="stadium_id" property="stadiumId" />
+        <result column="begin_time" property="beginTime" />
+        <result column="end_time" property="endTime" />
+        <result column="real_price" property="realPrice" />
+        <result column="order_price" property="orderPrice" />
+        <result column="serial_number" property="serialNumber" />
+        <result column="order_time" property="orderTime" />
+        <result column="payment_time" property="paymentTime" />
+        <result column="status" property="status" />
+        <result column="deleted" property="deleted" />
+        <result column="name" property="name" />
+        <result column="phone" property="phone" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        order_id, user_id, venue_id, stadium_id, begin_time, end_time, real_price, order_price, serial_number, order_time, payment_time, `status`, deleted, `name`, phone
+    </sql>
+
+</mapper>

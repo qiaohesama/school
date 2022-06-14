@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mnnu.common.dao.GymStadiumInfoBaseMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.mnnu.common.entity.domain.GymStadiumInfoDO">
+        <id column="id" property="id" />
+        <result column="price" property="price" />
+        <result column="stadium_id" property="stadiumId" />
+        <result column="date_arr" property="dateArr" />
+        <result column="time_arr" property="timeArr" />
+        <result column="weekend_arr" property="weekendArr" />
+        <result column="pic_arr" property="picArr" />
+        <result column="head_pic" property="headPic" />
+        <result column="long_pic_arr" property="longPicArr" />
+        <result column="point" property="point" />
+        <result column="introduce" property="introduce" />
+        <result column="latitude_longitude" property="latitudeLongitude" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, price, stadium_id, date_arr, time_arr, weekend_arr, pic_arr, head_pic, long_pic_arr, `point`, introduce, latitude_longitude
+    </sql>
+
+</mapper>

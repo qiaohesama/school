@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mnnu.common.dao.GymPaymentLogBaseMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.mnnu.common.entity.domain.GymPaymentLogDO">
+        <id column="id" property="id" />
+        <result column="serial_number" property="serialNumber" />
+        <result column="notify_time" property="notifyTime" />
+        <result column="status" property="status" />
+        <result column="order_id" property="orderId" />
+        <result column="payment_price" property="paymentPrice" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, serial_number, notify_time, `status`, order_id, payment_price
+    </sql>
+
+</mapper>
