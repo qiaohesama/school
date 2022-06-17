@@ -2,6 +2,7 @@ package com.mnnu.api.controller;
 
 import com.mnnu.api.entity.bo.GymCommentPageQueryBO;
 import com.mnnu.api.entity.bo.GymPaymentLogPageQueryBO;
+import com.mnnu.api.entity.dto.GymCommentDTO;
 import com.mnnu.api.entity.vo.GymCommentVO;
 import com.mnnu.api.entity.vo.GymPaymentLogVO;
 import com.mnnu.api.service.GymCommentService;
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @Slf4j
-@RequestMapping("/gymComment")
+@RequestMapping("/comment")
 @AllArgsConstructor
 @Api(tags = "评论控制器")
 public class GymCommentController {
@@ -22,7 +23,12 @@ public class GymCommentController {
     @GetMapping("/getPage")
     public R<PageVO<GymCommentVO>> getPage(@ModelAttribute GymCommentPageQueryBO bo)
     {
-        System.out.println(bo);
         return R.data(gymCommentService.getPage(bo));
+    }
+    @PostMapping("/save")
+    public R<Void> save(@RequestBody GymCommentDTO gymCommentDTO)
+    {
+        gymCommentService.saveComment(gymCommentDTO);
+        return  R.success();
     }
 }

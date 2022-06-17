@@ -1,5 +1,6 @@
 package com.mnnu.admin.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.mnnu.admin.entity.dto.GymUserRoleRelationDTO;
 import com.mnnu.admin.service.GymUserRoleRelationService;
@@ -24,8 +25,13 @@ public class GymUserRoleRelationImpl extends ServiceImpl<GymUserRoleRelationBase
 
     @Override
     public void updateByUserRoleRelationId(GymUserRoleRelationDTO gymUserRoleRelationDTO) {
+        QueryWrapper<GymUserRoleRelationDO> wrapper=new QueryWrapper<>();
+        wrapper.eq("user_id",gymUserRoleRelationDTO.getUserId());
+        GymUserRoleRelationDO gymUserRoleRelationDO1 = this.getOne(wrapper);
         GymUserRoleRelationDO gymUserRoleRelationDO=new GymUserRoleRelationDO();
         BeanUtils.copyProperties(gymUserRoleRelationDTO,gymUserRoleRelationDO);
+        gymUserRoleRelationDO.setId(gymUserRoleRelationDO1.getId());
         this.updateById(gymUserRoleRelationDO);
     }
+
 }

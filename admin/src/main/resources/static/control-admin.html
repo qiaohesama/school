@@ -96,8 +96,8 @@
                                 class="accordion-icon fa fa-angle-left"></i>
                         </a>
                         <ul class="sub-menu">
-                            <li><a href="control-stadium.html" class="active">场馆审核</a></li>
-                            <li><a href="control-admin.html">场馆管理员审核</a></li>
+                            <li><a href="control-stadium.html" >场馆审核</a></li>
+                            <li><a href="control-admin.html" class="active" >场馆管理员审核</a></li>
                             <li><a href="form-file-upload.html">File Upload</a></li>
                             <li><a href="form-image-crop.html">Image Crop</a></li>
                             <li><a href="form-image-zoom.html">Image Zoom</a></li>
@@ -276,7 +276,7 @@
                     <div class="col-md-12">
                         <div class="panel panel-white">
                             <div class="panel-heading clearfix">
-                                <h4 class="panel-title">场馆数据</h4>
+                                <h4 class="panel-title">用户数据</h4>
                             </div>
                             <div class="panel-body">
                                 <div class="table-responsive">
@@ -289,43 +289,25 @@
                                                          label="id"
                                         >
                                         </el-table-column>
-                                        <el-table-column prop="stadiumId"
-                                                         label="场馆id"
+                                        <el-table-column prop="userId"
+                                                         label="用户id"
                                         ></el-table-column>
                                         <el-table-column prop="remark"
                                                          label="备注"
                                         >
                                         </el-table-column>
-                                        <el-table-column prop="status"
-                                                         label="当前状态"
-                                        >
-                                            <template slot-scope="scope">
-                                                <label v-if="scope.row.status===0">审批中</label>
-                                                <label v-if="scope.row.status===1">通过</label>
-                                                <label v-if="scope.row.status===2">驳回</label>
-                                            </template>
-                                        </el-table-column>
 
                                         <el-table-column
-                                                prop="createTime"
                                                 label="操作">
                                             <template slot-scope="scope">
-                                                <div v-if="scope.row.status===0">
                                                     <el-button type="primary" @click="getDetail(scope.row)"
                                                                icon="el-icon-view" circle size="mini"></el-button>
                                                     <el-button type="success" @click="updateCheck(scope.row)"
                                                                icon="el-icon-check" circle size="mini"></el-button>
                                                     <el-button type="danger" icon="el-icon-close"
-                                                               v-on:click="updateClose(scope.row)" circle
+                                                               v-on:click="deleteAdminInfo(scope.row.id)" circle
                                                                size="mini"></el-button>
-                                                </div>
-                                                <div v-else>
-                                                    <el-button type="primary" @click="getDetail(scope.row)"
-                                                               @click="a"
-                                                               icon="el-icon-view" circle size="mini"></el-button>
-                                                </div>
                                             </template>
-
                                         </el-table-column>
                                     </el-table>
                                     <div class="block" style="text-align: center">
@@ -338,11 +320,9 @@
                                                 :total="userPagination.total">
                                         </el-pagination>
                                     </div>
-                                    <el-dialog title="详细信息" :visible.sync="dialogTableVisible">
+                                    <el-dialog title="相关材料" :visible.sync="dialogTableVisible">
                                         <el-table :data="detail">
-                                            <el-table-column property="price" label="预约价格"></el-table-column>
-                                            <el-table-column prop="introduce" label="场馆介绍"></el-table-column>
-                                            <el-table-column prop="headPic" label="场馆图片"></el-table-column>
+                                            <el-table-column property="price" label="图片"></el-table-column>
                                         </el-table>
                                     </el-dialog>
                                 </div>
@@ -570,8 +550,7 @@
                 pageSize: 10,//每页显示的记录数
                 total: 0,//总记录数
             },
-            stadium: {id: "", status: ""},
-            flag: 0
+            stadium: {id: "", status: ""}
         },
         created() {
             this.getList();
@@ -580,26 +559,32 @@
             getList() {
                 param = "?current=" + this.userPagination.current;
                 param += "&pageSize=" + this.userPagination.pageSize;
-                axios.get("/stadiumApproval/getPage" + param).then((res) => {
+                axios.get("/adminInfo/getPage" + param).then((res) => {
                     this.tableData = res.data.data.list;
                     this.userPagination.total = res.data.data.total;
                     this.userPagination.current = res.data.data.current;
                     this.userPagination.pageSize = res.data.data.pageSize;
                 })
             },
+
+            updateStadium(row){
+                this.stadium.id=row.stadiumId
+                this.stadium.status="2"
+                axios.post("/stadium/update", this.stadium).then((res) => {
+                })
+            },
             updateCheck(row) {
                 this.$confirm("确认操作？", "提示", {type: "warning"}).then((res) => {
-                    row.status = 1
-                    axios.post("/stadiumApproval/update", row).then((res) => {
-                        if (res.data.success) {
-                            this.stadium.id = row.stadiumId
-                            this.stadium.status = "2"
-                            axios.post("/stadium/update", this.stadium).then((res) => {
+                    var urr = {}
+                    urr.userId=row.userId
+                    urr.roleId=2
+                    axios.post("/userRoleRelation/update", urr).then((res) => {
+                        if(res.data.success){
+                            this.$message.success("通过申请！")
+                            axios.post("/adminInfo/delete/" +row.id).then((res) => {
                             })
                         }
                     }).finally(() => {
-                        this.stadium={};
-                        this.$message.success("审核通过")
                         this.getList()
                     })
                 }).catch(() => {
@@ -607,10 +592,9 @@
                 })
 
             },
-            updateClose(row) {
+            deleteAdminInfo(id) {
                 this.$confirm("确认操作？", "提示", {type: "warning"}).then((res) => {
-                    row.status = 2
-                    axios.post("/stadiumApproval/update", row).then((res) => {
+                    axios.post("/adminInfo/delete/" +id).then((res) => {
                         this.$message.warning("驳回申请！")
                     }).finally(() => {
                         this.getList()
@@ -619,21 +603,6 @@
                     this.cancel();
                 })
 
-            },
-            deleteComment(row) {
-                this.$confirm("此操作永久删除当前评论，是否继续？", "警告", {type: "warning"}).then((res) => {
-                    axios.post("/stadiumApproval/delete/" + row.id).then((res) => {
-                        if (res.data.success) {
-                            this.$message.success("删除成功");
-                        } else {
-                            this.$message.error("数据同步失败,自动刷新");
-                        }
-                    }).finally(() => {
-                        this.getList()
-                    })
-                }).catch(() => {
-                    this.cancel();
-                })
             },
             handleCurrentChange(current) {
                 this.userPagination.current = current;

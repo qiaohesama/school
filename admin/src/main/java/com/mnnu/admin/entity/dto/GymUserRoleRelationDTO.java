@@ -3,7 +3,9 @@ package com.mnnu.admin.entity.dto;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 
+@Data
 public class GymUserRoleRelationDTO {
     @TableId("id")
     private Long id;
