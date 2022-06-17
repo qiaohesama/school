@@ -8,7 +8,9 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-
+@Data
+@EqualsAndHashCode(callSuper = true)
+@ApiModel("订单页面")
 public class GymStadiumInfoPageQueryBO extends GymStadiumInfoDO {
 
 

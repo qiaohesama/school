@@ -12,16 +12,16 @@ import lombok.Setter;
 
 /**
  * <p>
- * 
+ * 支付记录表
  * </p>
  *
  * @author qiaohe
- * @since 2022-06-13
+ * @since 2022-06-16
  */
 @Getter
 @Setter
 @TableName("gym_payment_log")
-@ApiModel(value = "GymPaymentLogDO对象", description = "")
+@ApiModel(value = "GymPaymentLogDO对象", description = "支付记录表")
 public class GymPaymentLogDO implements Serializable {
 
     private static final long serialVersionUID = 1L;

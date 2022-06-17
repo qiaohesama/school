@@ -13,16 +13,16 @@ import lombok.Setter;
 
 /**
  * <p>
- * 
+ * 前台用户表
  * </p>
  *
  * @author qiaohe
- * @since 2022-06-13
+ * @since 2022-06-16
  */
 @Getter
 @Setter
 @TableName("gym_user")
-@ApiModel(value = "GymUserDO对象", description = "")
+@ApiModel(value = "GymUserDO对象", description = "前台用户表")
 public class GymUserDO implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -38,6 +38,10 @@ public class GymUserDO implements Serializable {
     @ApiModelProperty("用户名")
     @TableField("username")
     private String username;
+
+    @ApiModelProperty("真实姓名")
+    @TableField("real_name")
+    private String realName;
 
     @ApiModelProperty("头像地址")
     @TableField("head_pic")

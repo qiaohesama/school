@@ -13,16 +13,16 @@ import lombok.Setter;
 
 /**
  * <p>
- * 
+ * 体育馆场馆表
  * </p>
  *
  * @author qiaohe
- * @since 2022-06-13
+ * @since 2022-06-16
  */
 @Getter
 @Setter
 @TableName("gym_venue")
-@ApiModel(value = "GymVenueDO对象", description = "")
+@ApiModel(value = "GymVenueDO对象", description = "体育馆场馆表")
 public class GymVenueDO implements Serializable {
 
     private static final long serialVersionUID = 1L;

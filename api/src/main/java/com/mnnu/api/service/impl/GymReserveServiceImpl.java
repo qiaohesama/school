@@ -16,6 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -26,10 +27,10 @@ public class GymReserveServiceImpl extends ServiceImpl<GymReserveBaseMapper, Gym
     private final GymReserveBaseMapper baseMapper;
     @Override
     public PageVO<GymReserveVO> getPage(GymReservePageQueryBO gymReservePageQueryBO) {
-        LambdaQueryChainWrapper<GymReserveDO> wrapper = new LambdaQueryChainWrapper(baseMapper);
+        LambdaQueryChainWrapper<GymReserveDO> wrapper = new LambdaQueryChainWrapper<>(baseMapper);
         Long count = wrapper.count();
         List<GymReserveDO> list = wrapper.last(gymReservePageQueryBO.limitString()).list();
-        List<GymReserveVO> voList = null;
+        List<GymReserveVO> voList = new ArrayList<>();
         for (GymReserveDO gymReserveDO : list) {
             GymReserveVO vo = new GymReserveVO();
             BeanUtils.copyProperties(gymReserveDO, vo);

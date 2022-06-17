@@ -1,10 +1,16 @@
 package com.mnnu.api.entity.vo;
 
+import com.mnnu.common.entity.bo.BasePageQueryBO;
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.time.LocalDateTime;
-
-public class GymReserveVO {@ApiModelProperty("开始时间")
+@Data
+@ApiModel("一页订单")
+@EqualsAndHashCode(callSuper = true)
+public class GymReserveVO extends BasePageQueryBO {@ApiModelProperty("开始时间")
 private LocalDateTime beginTime;
 
     @ApiModelProperty("结束时间")

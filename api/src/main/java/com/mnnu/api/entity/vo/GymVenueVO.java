@@ -1,9 +1,16 @@
 package com.mnnu.api.entity.vo;
 
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.mnnu.common.entity.bo.BasePageQueryBO;
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
-public class GymVenueVO {
+@Data
+@ApiModel("一页订单")
+@EqualsAndHashCode(callSuper = true)
+public class GymVenueVO extends BasePageQueryBO {
     @ApiModelProperty("场馆类型 1足球 2羽毛 ")
     private Integer type;
 

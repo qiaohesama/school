@@ -8,11 +8,13 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import java.time.LocalDateTime;
+
 @Data
 @ApiModel("一页订单")
 @EqualsAndHashCode(callSuper = true)
-public class GymPaymentLogVO extends BasePageQueryBO {    @ApiModelProperty("交易的序列号")
-private String serialNumber;
+public class GymPaymentLogVO extends BasePageQueryBO {
+    @ApiModelProperty("交易的序列号")
+    private String serialNumber;
 
     @ApiModelProperty("接收到回调的时间")
     private LocalDateTime notifyTime;

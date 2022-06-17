@@ -17,6 +17,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -25,10 +26,10 @@ import java.util.List;
 public class GymStadiumServiceImpl extends ServiceImpl<GymStadiumBaseMapper, GymStadiumDO> implements GymStadiumService {
     @Override
     public PageVO<GymStadiumVO> getPage(GymStadiumPageQueryBO bo) {
-        LambdaQueryChainWrapper<GymStadiumDO> wrapper = new LambdaQueryChainWrapper(baseMapper);
+        LambdaQueryChainWrapper<GymStadiumDO> wrapper = new LambdaQueryChainWrapper<>(baseMapper);
         Long count = wrapper.count();
         List<GymStadiumDO> list = wrapper.last(bo.limitString()).list();
-        List<GymStadiumVO> voList = null;
+        List<GymStadiumVO> voList = new ArrayList<>();
         for (GymStadiumDO gymStadiumDO : list) {
             GymStadiumVO vo = new GymStadiumVO();
             BeanUtils.copyProperties(gymStadiumDO, vo);

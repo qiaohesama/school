@@ -1,6 +1,7 @@
 package com.mnnu.api.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.mnnu.api.entity.dto.GymUserDTO;
 import com.mnnu.api.entity.vo.GymUserVO;
 import com.mnnu.api.service.GymUserService;
 import com.mnnu.common.dao.GymUserBaseMapper;
@@ -20,5 +21,12 @@ public class GymUserServiceImpl extends ServiceImpl<GymUserBaseMapper, GymUserDO
         GymUserVO userVO=new GymUserVO();
         BeanUtils.copyProperties(userDO, userVO);
         return userVO;
+    }
+
+    @Override
+    public void updateByUserId(GymUserDTO gymUserDTO) {
+        GymUserDO userDO=new GymUserDO();
+        BeanUtils.copyProperties(gymUserDTO, userDO);
+        this.updateById(userDO);
     }
 }

@@ -1,8 +1,15 @@
 package com.mnnu.api.entity.vo;
 
+import com.mnnu.common.entity.bo.BasePageQueryBO;
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
-public class GymStadiumInfoVO {
+@Data
+@ApiModel("一页订单")
+@EqualsAndHashCode(callSuper = true)
+public class GymStadiumInfoVO extends BasePageQueryBO {
 
     @ApiModelProperty("预约的价格 以分为单位 ")
     private Integer price;

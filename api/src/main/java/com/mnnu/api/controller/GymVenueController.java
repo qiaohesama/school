@@ -10,6 +10,7 @@ import com.mnnu.common.entity.domain.GymUserRoleRelationDO;
 import com.mnnu.common.entity.domain.GymVenueDO;
 import com.mnnu.common.entity.vo.PageVO;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.*;
 @Api(tags = "体育场地点控制器")
 public class GymVenueController {
     private final GymVenueService gymVenueService;
+    @ApiOperation("通过id获得体育馆地点信息")
     @GetMapping("/{id}")
     public R<GymVenueVO> getByStadiumId(@PathVariable int id) {
         return R.data(gymVenueService.getVenueById(id));

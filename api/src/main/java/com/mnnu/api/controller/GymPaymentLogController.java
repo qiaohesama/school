@@ -21,9 +21,7 @@ public class GymPaymentLogController {
 
     private final GymPaymentLogService gymPaymentLogService;
 
-    private final GymPaymentLogBaseMapper baseMapper;
-
-    @ApiOperation("获得支付日志")
+    @ApiOperation("管理员获得支付日志列表")
     @GetMapping("/getPage")
     public R<PageVO<GymPaymentLogVO>> getPage(@ModelAttribute GymPaymentLogPageQueryBO gymPaymentLogPageQueryBO) {
         return R.data(gymPaymentLogService.getPage(gymPaymentLogPageQueryBO));

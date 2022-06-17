@@ -13,16 +13,16 @@ import lombok.Setter;
 
 /**
  * <p>
- * 
+ * 预约订单表
  * </p>
  *
  * @author qiaohe
- * @since 2022-06-13
+ * @since 2022-06-16
  */
 @Getter
 @Setter
 @TableName("gym_reserve")
-@ApiModel(value = "GymReserveDO对象", description = "")
+@ApiModel(value = "GymReserveDO对象", description = "预约订单表")
 public class GymReserveDO implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -35,10 +35,11 @@ public class GymReserveDO implements Serializable {
     @TableField("user_id")
     private Long userId;
 
+    @ApiModelProperty("场馆id")
     @TableField("venue_id")
     private Integer venueId;
 
-    @ApiModelProperty("场馆id")
+    @ApiModelProperty("体育场id")
     @TableField("stadium_id")
     private Integer stadiumId;
 
@@ -62,9 +63,11 @@ public class GymReserveDO implements Serializable {
     @TableField("serial_number")
     private String serialNumber;
 
+    @ApiModelProperty("下单时间")
     @TableField("order_time")
     private LocalDateTime orderTime;
 
+    @ApiModelProperty("付款时间")
     @TableField("payment_time")
     private LocalDateTime paymentTime;
 

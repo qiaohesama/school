@@ -8,19 +8,21 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 /**
  * <p>
- * 
+ * 体育馆信息表
  * </p>
  *
  * @author qiaohe
- * @since 2022-06-13
+ * @since 2022-06-16
  */
 @Getter
 @Setter
 @TableName("gym_stadium_info")
-@ApiModel(value = "GymStadiumInfoDO对象", description = "")
+@ApiModel(value = "GymStadiumInfoDO对象", description = "体育馆信息表")
+
 public class GymStadiumInfoDO implements Serializable {
 
     private static final long serialVersionUID = 1L;

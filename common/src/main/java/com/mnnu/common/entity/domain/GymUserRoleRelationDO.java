@@ -11,16 +11,16 @@ import lombok.Setter;
 
 /**
  * <p>
- * 
+ * 前台用户角色关联表
  * </p>
  *
  * @author qiaohe
- * @since 2022-06-13
+ * @since 2022-06-16
  */
 @Getter
 @Setter
 @TableName("gym_user_role_relation")
-@ApiModel(value = "GymUserRoleRelationDO对象", description = "")
+@ApiModel(value = "GymUserRoleRelationDO对象", description = "前台用户角色关联表")
 public class GymUserRoleRelationDO implements Serializable {
 
     private static final long serialVersionUID = 1L;
