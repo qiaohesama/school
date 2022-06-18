@@ -10,4 +10,6 @@ public interface GymUserService  extends IService<GymUserDO> {
     GymUserVO getByUserId(int id);
 
     void updateByUserId(GymUserDTO gymUserDTO);
+
+    void saveUser(GymUserDTO gymUserDTO);
 }

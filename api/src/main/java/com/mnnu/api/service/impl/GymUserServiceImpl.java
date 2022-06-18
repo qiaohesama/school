@@ -18,15 +18,22 @@ public class GymUserServiceImpl extends ServiceImpl<GymUserBaseMapper, GymUserDO
     @Override
     public GymUserVO getByUserId(int id) {
         GymUserDO userDO = this.getById(id);
-        GymUserVO userVO=new GymUserVO();
+        GymUserVO userVO = new GymUserVO();
         BeanUtils.copyProperties(userDO, userVO);
         return userVO;
     }
 
     @Override
     public void updateByUserId(GymUserDTO gymUserDTO) {
-        GymUserDO userDO=new GymUserDO();
+        GymUserDO userDO = new GymUserDO();
         BeanUtils.copyProperties(gymUserDTO, userDO);
         this.updateById(userDO);
+    }
+
+    @Override
+    public void saveUser(GymUserDTO gymUserDTO) {
+        GymUserDO gymUserDO = new GymUserDO();
+        BeanUtils.copyProperties(gymUserDTO, gymUserDO);
+        this.save(gymUserDO);
     }
 }

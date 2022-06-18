@@ -1,18 +1,12 @@
-package com.mnnu.api.entity.vo;
+package com.mnnu.api.entity.dto;
 
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.mnnu.common.entity.bo.BasePageQueryBO;
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 import java.time.LocalDateTime;
-
 @Data
-@ApiModel("一页订单")
-@EqualsAndHashCode(callSuper = true)
-public class GymReserveVO extends BasePageQueryBO {
+public class GymReserveDTO {
+
     @ApiModelProperty("开始时间")
     private LocalDateTime beginTime;
 

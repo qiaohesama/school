@@ -3,6 +3,7 @@ package com.mnnu.api.service.impl;
 import com.baomidou.mybatisplus.extension.conditions.query.LambdaQueryChainWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.mnnu.api.entity.bo.GymReservePageQueryBO;
+import com.mnnu.api.entity.dto.GymReserveDTO;
 import com.mnnu.api.entity.vo.GymPaymentLogVO;
 import com.mnnu.api.entity.vo.GymReserveVO;
 import com.mnnu.api.service.GymReserveService;
@@ -37,5 +38,12 @@ public class GymReserveServiceImpl extends ServiceImpl<GymReserveBaseMapper, Gym
             voList.add(vo);
         }
         return gymReservePageQueryBO.buildPage(voList, count);
+    }
+
+    @Override
+    public void saveGymReserve(GymReserveDTO gymReserveDTO) {
+        GymReserveDO gymReserveDO=new GymReserveDO();
+        BeanUtils.copyProperties(gymReserveDTO,gymReserveDO);
+        this.save(gymReserveDO);
     }
 }

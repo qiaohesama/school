@@ -1,6 +1,7 @@
 package com.mnnu.api.entity.vo;
 
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.mnnu.common.entity.bo.BasePageQueryBO;
 import io.swagger.annotations.ApiModel;
@@ -15,6 +16,9 @@ import java.time.LocalDateTime;
 @EqualsAndHashCode(callSuper = true)
 @ApiModel("场馆详细信息")
 public class GymStadiumVO extends BasePageQueryBO {
+    @TableId("id")
+    private Integer id;
+
     @ApiModelProperty("商标图片")
     @TableField("logo_pic")
     private String logoPic;

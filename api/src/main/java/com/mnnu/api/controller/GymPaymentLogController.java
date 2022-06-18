@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 @RequestMapping("/gymPaymentLog")
 @AllArgsConstructor
-@Api(tags = "支付日志控制器")
+@Api(tags = "支付日志")
 public class GymPaymentLogController {
 
     private final GymPaymentLogService gymPaymentLogService;

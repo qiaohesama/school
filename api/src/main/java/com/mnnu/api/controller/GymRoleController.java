@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RequestMapping("/role")
 @AllArgsConstructor
-@Api(tags = "角色控制器")
+@Api(tags = "角色")
 public class GymRoleController {
     private final GymRoleService gymRoleService;
 

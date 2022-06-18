@@ -23,6 +23,18 @@ public class GymReservePageQueryBO extends BasePageQueryBO {
     @ApiModelProperty("结束时间")
     private LocalDateTime endTime;
 
+    @ApiModelProperty("用户id ")
+    @TableField("user_id")
+    private Long userId;
+
+    @ApiModelProperty("场馆id")
+    @TableField("venue_id")
+    private Integer venueId;
+
+    @ApiModelProperty("体育场id")
+    @TableField("stadium_id")
+    private Integer stadiumId;
+
     @ApiModelProperty("实付价格")
     private Integer realPrice;
 

@@ -1,5 +1,6 @@
 package com.mnnu.api.entity.vo;
 
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.mnnu.common.entity.bo.BasePageQueryBO;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -10,6 +11,8 @@ import lombok.EqualsAndHashCode;
 @ApiModel("一页订单")
 @EqualsAndHashCode(callSuper = true)
 public class GymStadiumInfoVO extends BasePageQueryBO {
+    @TableId("id")
+    private Integer id;
 
     @ApiModelProperty("预约的价格 以分为单位 ")
     private Integer price;

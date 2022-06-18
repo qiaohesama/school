@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 @RequestMapping("/user")
 @AllArgsConstructor
-@Api(tags = "用户控制器")
+@Api(tags = "用户")
 public class GymUserController {
     private final GymUserService gymUserService;
 
@@ -37,5 +37,12 @@ public class GymUserController {
     @GetMapping("/{id}")
     public R<GymUserVO> getPage(@PathVariable int id) {
         return R.data(gymUserService.getByUserId(id));
+    }
+
+    @ApiOperation("新增用户(注册)")
+    @PostMapping("/save")
+    public R<Void> save(@RequestBody GymUserDTO gymUserDTO) {
+        gymUserService.saveUser(gymUserDTO);
+        return R.success();
     }
 }

@@ -17,18 +17,18 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 @RequestMapping("/comment")
 @AllArgsConstructor
-@Api(tags = "评论控制器")
+@Api(tags = "评论")
 public class GymCommentController {
     GymCommentService gymCommentService;
+
     @GetMapping("/getPage")
-    public R<PageVO<GymCommentVO>> getPage(@ModelAttribute GymCommentPageQueryBO bo)
-    {
+    public R<PageVO<GymCommentVO>> getPage(@ModelAttribute GymCommentPageQueryBO bo) {
         return R.data(gymCommentService.getPage(bo));
     }
+
     @PostMapping("/save")
-    public R<Void> save(@RequestBody GymCommentDTO gymCommentDTO)
-    {
+    public R<Void> save(@RequestBody GymCommentDTO gymCommentDTO) {
         gymCommentService.saveComment(gymCommentDTO);
-        return  R.success();
+        return R.success();
     }
 }

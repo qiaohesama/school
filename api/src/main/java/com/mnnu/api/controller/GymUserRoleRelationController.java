@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RequestMapping("/userRoleRelation")
 @AllArgsConstructor
-@Api(tags = "用户_角色_关系控制器")
+@Api(tags = "用户_角色_关系")
 public class GymUserRoleRelationController {
     private final GymUserRoleRelationService gymUserRoleRelationService;
 

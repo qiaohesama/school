@@ -18,10 +18,10 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RequestMapping("/stadium")
 @AllArgsConstructor
-@Api(tags = "体育馆控制器")
+@Api(tags = "体育馆大体信息")
 public class GymStadiumController {
     private final GymStadiumService gymStadiumService;
-    @ApiOperation("管理员获得体育馆大体信息")
+    @ApiOperation("管理员获得体育馆大体信息(场馆名可以进行模糊查询)")
     @GetMapping("/getPage")
     public R<PageVO<GymStadiumVO>> getPage(@ModelAttribute GymStadiumPageQueryBO bo) {
         return R.data(gymStadiumService.getPage(bo));

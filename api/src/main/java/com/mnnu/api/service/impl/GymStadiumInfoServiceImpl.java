@@ -1,6 +1,7 @@
 package com.mnnu.api.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.mnnu.api.entity.dto.GymStadiumInfoDTO;
 import com.mnnu.api.entity.vo.GymStadiumInfoVO;
 import com.mnnu.api.entity.vo.GymUserVO;
 import com.mnnu.api.service.GymStadiumInfoService;
@@ -22,5 +23,19 @@ public class GymStadiumInfoServiceImpl extends ServiceImpl<GymStadiumInfoBaseMap
         GymStadiumInfoVO stadiumInfoVO = new GymStadiumInfoVO();
         BeanUtils.copyProperties(stadiumInfoDO, stadiumInfoVO);
         return stadiumInfoVO;
+    }
+
+    @Override
+    public void updateStadiumInfo(GymStadiumInfoDTO gymStadiumInfoDTO) {
+        GymStadiumInfoDO gymStadiumInfoDO=new GymStadiumInfoDO();
+        BeanUtils.copyProperties(gymStadiumInfoDTO,gymStadiumInfoDO);
+        this.updateById(gymStadiumInfoDO);
+    }
+
+    @Override
+    public void saveStadiumInfo(GymStadiumInfoDTO gymStadiumInfoDTO) {
+        GymStadiumInfoDO gymStadiumInfoDO=new GymStadiumInfoDO();
+        BeanUtils.copyProperties(gymStadiumInfoDTO,gymStadiumInfoDO);
+        this.save(gymStadiumInfoDO);
     }
 }

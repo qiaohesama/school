@@ -11,4 +11,5 @@ import com.mnnu.common.entity.vo.PageVO;
 
 public interface GymStadiumService  extends IService<GymStadiumDO> {
     PageVO<GymStadiumVO> getPage(GymStadiumPageQueryBO bo);
+
 }

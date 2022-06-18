@@ -19,10 +19,10 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 @RequestMapping("/venue")
 @AllArgsConstructor
-@Api(tags = "体育场地点控制器")
+@Api(tags = "场馆里的会场")
 public class GymVenueController {
     private final GymVenueService gymVenueService;
-    @ApiOperation("通过id获得体育馆地点信息")
+    @ApiOperation("通过体育场id获得会场信息")
     @GetMapping("/{id}")
     public R<GymVenueVO> getByStadiumId(@PathVariable int id) {
         return R.data(gymVenueService.getVenueById(id));

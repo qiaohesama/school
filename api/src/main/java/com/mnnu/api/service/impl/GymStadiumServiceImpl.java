@@ -14,6 +14,7 @@ import com.mnnu.common.entity.domain.GymStadiumDO;
 import com.mnnu.common.entity.vo.PageVO;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
@@ -28,7 +29,7 @@ public class GymStadiumServiceImpl extends ServiceImpl<GymStadiumBaseMapper, Gym
     public PageVO<GymStadiumVO> getPage(GymStadiumPageQueryBO bo) {
         LambdaQueryChainWrapper<GymStadiumDO> wrapper = new LambdaQueryChainWrapper<>(baseMapper);
         Long count = wrapper.count();
-        List<GymStadiumDO> list = wrapper.last(bo.limitString()).list();
+        List<GymStadiumDO> list = wrapper.like(Strings.isNotEmpty(bo.getName()),GymStadiumDO::getName,bo.getName()).last(bo.limitString()).list();
         List<GymStadiumVO> voList = new ArrayList<>();
         for (GymStadiumDO gymStadiumDO : list) {
             GymStadiumVO vo = new GymStadiumVO();
@@ -37,4 +38,5 @@ public class GymStadiumServiceImpl extends ServiceImpl<GymStadiumBaseMapper, Gym
         }
         return bo.buildPage(voList, count);
     }
+
 }

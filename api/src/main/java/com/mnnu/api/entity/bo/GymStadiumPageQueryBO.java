@@ -1,5 +1,6 @@
 package com.mnnu.api.entity.bo;
 
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.mnnu.common.entity.bo.BasePageQueryBO;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -10,7 +11,9 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 @ApiModel("订单页面")
 public class GymStadiumPageQueryBO extends BasePageQueryBO {
-    private static final long serialVersionUID = 1L;
+    @TableId("id")
+    private Integer id;
+
     @ApiModelProperty("商标图片")
     private String logoPic;
 
