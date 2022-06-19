@@ -54,22 +54,22 @@
                         </a>
                     </li>
 
-                    <li >
+                    <li>
                         <a href="javascript:void(0);">
                             <i class="menu-icon icon-flash_on"></i><span>后台设置</span><i
                                 class="accordion-icon fa fa-angle-left"></i>
                         </a>
-                        <ul class="sub-menu" >
+                        <ul class="sub-menu">
                             <li><a href="manager-control.html">管理员设置</a></li>
                         </ul>
                     </li>
-                    <li  class="active-page">
+                    <li class="active-page">
                         <a href="javascript:void(0);">
                             <i class="menu-icon icon-code"></i><span>审核管理</span><i
                                 class="accordion-icon fa fa-angle-left"></i>
                         </a>
                         <ul class="sub-menu">
-                            <li><a href="control-stadium.html" >场馆审核</a></li>
+                            <li><a href="control-stadium.html">场馆审核</a></li>
                             <li><a href="control-admin.html" class="active">场馆管理员审核</a></li>
                         </ul>
                     </li>
@@ -78,8 +78,8 @@
                             <i class="menu-icon icon-format_list_bulleted"></i><span>数据管理</span><i
                                 class="accordion-icon fa fa-angle-left"></i>
                         </a>
-                        <ul class="sub-menu" >
-                            <li><a href="table-comment.html" >评论数据</a></li>
+                        <ul class="sub-menu">
+                            <li><a href="table-comment.html">评论数据</a></li>
                             <li><a href="table-order.html">订单数据</a></li>
                             <li><a href="table-stadium.html">场馆数据</a></li>
                             <li><a href="table-user.html">用户数据</a></li>
@@ -242,13 +242,13 @@
                                         <el-table-column
                                                 label="操作">
                                             <template slot-scope="scope">
-                                                    <el-button type="primary" @click="getDetail(scope.row)"
-                                                               icon="el-icon-view" circle size="mini"></el-button>
-                                                    <el-button type="success" @click="updateCheck(scope.row)"
-                                                               icon="el-icon-check" circle size="mini"></el-button>
-                                                    <el-button type="danger" icon="el-icon-close"
-                                                               v-on:click="deleteAdminInfo(scope.row.id)" circle
-                                                               size="mini"></el-button>
+                                                <el-button type="primary" @click="getDetail(scope.row)"
+                                                           icon="el-icon-view" circle size="mini"></el-button>
+                                                <el-button type="success" @click="updateCheck(scope.row)"
+                                                           icon="el-icon-check" circle size="mini"></el-button>
+                                                <el-button type="danger" icon="el-icon-close"
+                                                           v-on:click="deleteAdminInfo(scope.row.id)" circle
+                                                           size="mini"></el-button>
                                             </template>
                                         </el-table-column>
                                     </el-table>
@@ -509,21 +509,21 @@
                 })
             },
 
-            updateStadium(row){
-                this.stadium.id=row.stadiumId
-                this.stadium.status="2"
+            updateStadium(row) {
+                this.stadium.id = row.stadiumId
+                this.stadium.status = "2"
                 axios.post("/stadium/update", this.stadium).then((res) => {
                 })
             },
             updateCheck(row) {
                 this.$confirm("确认操作？", "提示", {type: "warning"}).then((res) => {
                     var urr = {}
-                    urr.userId=row.userId
-                    urr.roleId=2
+                    urr.userId = row.userId
+                    urr.roleId = 2
                     axios.post("/userRoleRelation/update", urr).then((res) => {
-                        if(res.data.success){
+                        if (res.data.success) {
                             this.$message.success("通过申请！")
-                            axios.post("/adminInfo/delete/" +row.id).then((res) => {
+                            axios.post("/adminInfo/delete/" + row.id).then((res) => {
                             })
                         }
                     }).finally(() => {
@@ -536,7 +536,7 @@
             },
             deleteAdminInfo(id) {
                 this.$confirm("确认操作？", "提示", {type: "warning"}).then((res) => {
-                    axios.post("/adminInfo/delete/" +id).then((res) => {
+                    axios.post("/adminInfo/delete/" + id).then((res) => {
                         this.$message.warning("驳回申请！")
                     }).finally(() => {
                         this.getList()

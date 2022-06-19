@@ -17,7 +17,7 @@ import lombok.Setter;
  * </p>
  *
  * @author qiaohe
- * @since 2022-06-16
+ * @since 2022-06-18
  */
 @Getter
 @Setter
@@ -71,7 +71,7 @@ public class GymReserveDO implements Serializable {
     @TableField("payment_time")
     private LocalDateTime paymentTime;
 
-    @ApiModelProperty("订单状态 1未支付 2已支付\\等待进场 3已取消 4已超时 5在场馆 6超时未使用")
+    @ApiModelProperty("订单状态 1未支付 2已支付\\等待进场 3已取消 4已超时 5在场馆 6超时未使用 7退款中 8已退款")
     @TableField("`status`")
     private Integer status;
 

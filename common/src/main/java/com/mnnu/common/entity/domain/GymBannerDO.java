@@ -11,7 +11,7 @@ import lombok.Setter;
 
 /**
  * <p>
- * 前台角色表
+ * 轮播图表
  * </p>
  *
  * @author qiaohe
@@ -19,18 +19,22 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-@TableName("gym_role")
-@ApiModel(value = "GymRoleDO对象", description = "前台角色表")
-public class GymRoleDO implements Serializable {
+@TableName("gym_banner")
+@ApiModel(value = "GymBannerDO对象", description = "轮播图表")
+public class GymBannerDO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @TableId("id")
-    private Long id;
+    private Integer id;
 
-    @ApiModelProperty("角色")
-    @TableField("role")
-    private String role;
+    @ApiModelProperty("跳转的url地址")
+    @TableField("skip_url")
+    private String skipUrl;
+
+    @ApiModelProperty("图片路径")
+    @TableField("img_url")
+    private String imgUrl;
 
 
 }

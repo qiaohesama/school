@@ -13,7 +13,7 @@ import lombok.Setter;
 
 /**
  * <p>
- * 前台用户表
+ * 管理员表
  * </p>
  *
  * @author qiaohe
@@ -21,17 +21,16 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-@TableName("gym_user")
-@ApiModel(value = "GymUserDO对象", description = "前台用户表")
-public class GymUserDO implements Serializable {
+@TableName("gym_manager_user")
+@ApiModel(value = "GymManagerUserDO对象", description = "管理员表")
+public class GymManagerUserDO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty("雪花主键")
     @TableId("id")
-    private Long id;
+    private Integer id;
 
-    @ApiModelProperty("手机号")
+    @ApiModelProperty("管理员手机号")
     @TableField("phone")
     private String phone;
 
@@ -39,23 +38,18 @@ public class GymUserDO implements Serializable {
     @TableField("username")
     private String username;
 
-    @ApiModelProperty("真实姓名")
-    @TableField("real_name")
-    private String realName;
+    @ApiModelProperty("管理员密码")
+    @TableField("`password`")
+    private String password;
 
-    @ApiModelProperty("头像地址")
-    @TableField("head_pic")
-    private String headPic;
+    @ApiModelProperty("角色 1超级管理员 2普通管理员")
+    @TableField("role")
+    private Integer role;
 
-    @ApiModelProperty("身份证号")
-    @TableField("id_num")
-    private String idNum;
+    @ApiModelProperty("是否禁用 0启用 1禁用")
+    @TableField("banned")
+    private Integer banned;
 
-    @ApiModelProperty("状态 1正常 0禁用")
-    @TableField("`status`")
-    private Integer status;
-
-    @ApiModelProperty("逻辑删除字段 0存在 1删除")
     @TableField("deleted")
     @TableLogic
     private Integer deleted;

@@ -10,7 +10,7 @@ import org.apache.ibatis.annotations.Mapper;
  * </p>
  *
  * @author qiaohe
- * @since 2022-06-16
+ * @since 2022-06-18
  */
 @Mapper
 public interface GymVenueBaseMapper extends BaseMapper<GymVenueDO> {
