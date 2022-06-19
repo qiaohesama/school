@@ -25,10 +25,6 @@ public class GymManagerUserBO extends BasePageQueryBO {
     @TableField("username")
     private String username;
 
-    @ApiModelProperty("管理员密码")
-    @TableField("`password`")
-    private String password;
-
 
     @ApiModelProperty("角色 1超级管理员 2普通管理员")
     @TableField("role")

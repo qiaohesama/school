@@ -18,6 +18,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.util.DigestUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,5 +46,14 @@ public class GymManagerUserServiceImpl extends ServiceImpl<GymManagerUserBaseMap
         GymManagerUserDO gymManagerUserDO = new GymManagerUserDO();
         BeanUtils.copyProperties(gymManagerUserDTO, gymManagerUserDO);
         this.updateById(gymManagerUserDO);
+    }
+
+    @Override
+    public void saveManagerUser(GymManagerUserDTO gymManagerUserDTO) {
+        GymManagerUserDO gymManagerUserDO=new GymManagerUserDO();
+        BeanUtils.copyProperties(gymManagerUserDTO, gymManagerUserDO);
+        String password= DigestUtils.md5DigestAsHex(gymManagerUserDO.getPassword().getBytes());
+        gymManagerUserDO.setPassword(password);
+        this.save(gymManagerUserDO);
     }
 }

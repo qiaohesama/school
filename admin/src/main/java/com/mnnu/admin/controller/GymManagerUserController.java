@@ -37,4 +37,10 @@ public class GymManagerUserController {
         gymManagerUserService.updateGymManagerUseById(gymManagerUserDTO);
         return R.success();
     }
+
+    @PostMapping("/save")
+    public R<Void> save(@RequestBody GymManagerUserDTO gymManagerUserDTO) {
+        gymManagerUserService.saveManagerUser(gymManagerUserDTO);
+        return R.success();
+    }
 }

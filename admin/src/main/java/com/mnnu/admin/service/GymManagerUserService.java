@@ -12,4 +12,6 @@ import com.mnnu.common.entity.vo.PageVO;
 public interface GymManagerUserService extends IService<GymManagerUserDO> {
     PageVO<GymManagerUserVO> getPage(GymManagerUserBO gymManagerUserBO);
     void updateGymManagerUseById(GymManagerUserDTO gymManagerUserDTO);
+
+    void saveManagerUser(GymManagerUserDTO gymManagerUserDTO);
 }
