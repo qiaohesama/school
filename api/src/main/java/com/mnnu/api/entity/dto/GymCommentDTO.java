@@ -9,8 +9,6 @@ import lombok.Data;
 import java.time.LocalDateTime;
 @Data
 public class GymCommentDTO {
-    @TableId("id")
-    private Long id;
 
     @ApiModelProperty("评论内容")
     @TableField("content")
