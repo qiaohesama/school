@@ -24,8 +24,11 @@ public class GymStadiumServiceImpl extends ServiceImpl<GymStadiumBaseMapper, Gym
     @Override
     public PageVO<GymStadiumVO> getPage(GymStadiumPageQueryBO bo) {
         LambdaQueryChainWrapper<GymStadiumDO> wrapper = new LambdaQueryChainWrapper(baseMapper);
-        Long count = wrapper.count();
-        List<GymStadiumDO> list = wrapper.last(bo.limitString()).list();
+        Long count = wrapper.like(bo.getId()!=null,GymStadiumDO::getId,bo.getId()).count();
+        List<GymStadiumDO> list = wrapper
+                .like(bo.getId()!=null,GymStadiumDO::getId,bo.getId())
+                .last(bo.limitString())
+                .list();
         List<GymStadiumVO> voList = new ArrayList<>();
         for (GymStadiumDO gymStadiumDO : list) {
             GymStadiumVO vo = new GymStadiumVO();

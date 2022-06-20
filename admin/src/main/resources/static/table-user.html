@@ -221,6 +221,20 @@
                                 <h4 class="panel-title" >用户数据</h4>
                             </div>
                             <div class="panel-body">
+                                <div>
+                                    <div style="width: 300px;float: left">
+                                        <el-input
+                                                placeholder="通过id查找"
+                                                v-model="input"
+                                                @change="getList"
+                                                clearable>
+                                        </el-input>
+                                    </div>
+                                    <div style="margin-left: 310px">
+                                        <el-button type="primary" icon="el-icon-search" circle
+                                                   @click="getList()"></el-button>
+                                    </div>
+                                </div>
                                 <div class="table-responsive">
                                     <el-table
                                             :data="tableData"
@@ -499,6 +513,7 @@
         el: '#app',
 
         data: {
+            input:"",
             value: 0,
             dialogTableVisible: false,
             deleteUserForm:{id:"",deleted:""},
@@ -510,13 +525,14 @@
             }
         },
         created() {
-            this.getUser();
+            this.getList();
         },
         methods: {
-            getUser() {
+            getList() {
                 param = "?current=" + this.userPagination.current;
                 param += "&pageSize=" + this.userPagination.pageSize;
-                axios.get("/user/getAll"+param).then((res) => {
+                param += "&id="+this.input;
+                axios.get("/user/getPage"+param).then((res) => {
                     this.tableData = res.data.data.list;
                     this.userPagination.total=res.data.data.total;
                     this.userPagination.current=res.data.data.current;
@@ -542,7 +558,7 @@
                             this.$message.error("数据同步失败,自动刷新");
                         }
                     }).finally(() => {
-                       this.getUser()
+                       this.getList()
                     })
                 }).catch(() => {
                     this.cancel();
@@ -550,7 +566,7 @@
             },
             handleCurrentChange(current) {
                 this.userPagination.current= current;
-                this.getUser();
+                this.getList();
             },
         }
     })

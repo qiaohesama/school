@@ -29,8 +29,13 @@ public class GymReserveServiceImpl extends ServiceImpl<GymReserveBaseMapper, Gym
     @Override
     public PageVO<GymReserveVO> getPage(GymReservePageQueryBO gymReservePageQueryBO) {
         LambdaQueryChainWrapper<GymReserveDO> wrapper = new LambdaQueryChainWrapper(baseMapper);
-        Long count = wrapper.count();
-        List<GymReserveDO> list = wrapper.last(gymReservePageQueryBO.limitString()).list();
+        Long count = wrapper
+                .like(gymReservePageQueryBO!=null,GymReserveDO::getOrderId,gymReservePageQueryBO.getOrderId())
+                .count();
+        List<GymReserveDO> list = wrapper
+                .like(gymReservePageQueryBO!=null,GymReserveDO::getOrderId,gymReservePageQueryBO.getOrderId())
+                .last(gymReservePageQueryBO.limitString())
+                .list();
         List<GymReserveVO> voList = new ArrayList<>();
         for (GymReserveDO gymReserveDO : list) {
             GymReserveVO vo = new GymReserveVO();

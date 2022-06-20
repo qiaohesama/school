@@ -5,9 +5,13 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.mnnu.common.entity.bo.BasePageQueryBO;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.time.LocalDateTime;
 
+@Data
+@EqualsAndHashCode(callSuper = true)
 public class GymStadiumPageQueryBO extends BasePageQueryBO {
     private static final long serialVersionUID = 1L;
 

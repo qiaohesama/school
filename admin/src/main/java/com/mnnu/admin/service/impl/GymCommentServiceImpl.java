@@ -24,8 +24,8 @@ public class GymCommentServiceImpl extends ServiceImpl<GymCommentBaseMapper, Gym
     @Override
     public PageVO<GymCommentVO> getPage(GymCommentPageQueryBO bo) {
         LambdaQueryChainWrapper<GymCommentDO> wrapper = new LambdaQueryChainWrapper<>(baseMapper);
-        Long count = wrapper.count();
-        List<GymCommentDO> list = wrapper.last(bo.limitString()).list();
+        Long count = wrapper.like((bo.getId()!=null),GymCommentDO::getId,bo.getId()).count();
+        List<GymCommentDO> list = wrapper.like((bo.getId()!=null),GymCommentDO::getId,bo.getId()).last(bo.limitString()).list();
         List<GymCommentVO> voList = new ArrayList<>();
         for (GymCommentDO gymCommentDO : list) {
             GymCommentVO vo = new GymCommentVO();

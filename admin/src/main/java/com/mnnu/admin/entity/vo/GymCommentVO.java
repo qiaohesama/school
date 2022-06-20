@@ -3,6 +3,8 @@ package com.mnnu.admin.entity.vo;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableLogic;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import com.mnnu.common.entity.bo.BasePageQueryBO;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -14,6 +16,7 @@ import java.time.LocalDateTime;
 @ApiModel("一页订单")
 
 public class GymCommentVO extends BasePageQueryBO {
+    @JsonSerialize(using = ToStringSerializer.class)
     @TableId("id")
     private Long id;
 

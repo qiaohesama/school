@@ -3,6 +3,8 @@ package com.mnnu.admin.entity.bo;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableLogic;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import com.mnnu.common.entity.bo.BasePageQueryBO;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -18,6 +20,7 @@ public class GymReservePageQueryBO extends BasePageQueryBO {
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty("订单id 时间到秒加上redis自增，前缀为170")
+    @JsonSerialize(using = ToStringSerializer.class)
     @TableId("order_id")
     private String orderId;
 

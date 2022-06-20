@@ -54,16 +54,16 @@
                         </a>
                     </li>
 
-                    <li >
+                    <li>
                         <a href="javascript:void(0);">
                             <i class="menu-icon icon-flash_on"></i><span>后台设置</span><i
                                 class="accordion-icon fa fa-angle-left"></i>
                         </a>
-                        <ul class="sub-menu" >
+                        <ul class="sub-menu">
                             <li><a href="manager-control.html">管理员设置</a></li>
                         </ul>
                     </li>
-                    <li >
+                    <li>
                         <a href="javascript:void(0);">
                             <i class="menu-icon icon-code"></i><span>审核管理</span><i
                                 class="accordion-icon fa fa-angle-left"></i>
@@ -78,8 +78,8 @@
                             <i class="menu-icon icon-format_list_bulleted"></i><span>数据管理</span><i
                                 class="accordion-icon fa fa-angle-left"></i>
                         </a>
-                        <ul class="sub-menu" >
-                            <li><a href="table-comment.html"  >评论数据</a></li>
+                        <ul class="sub-menu">
+                            <li><a href="table-comment.html">评论数据</a></li>
                             <li><a href="table-order.html">订单数据</a></li>
                             <li><a href="table-stadium.html" class="active">场馆数据</a></li>
                             <li><a href="table-user.html">用户数据</a></li>
@@ -220,6 +220,20 @@
                                 <h4 class="panel-title">场馆数据</h4>
                             </div>
                             <div class="panel-body">
+                                <div>
+                                    <div style="width: 300px;float: left">
+                                        <el-input
+                                                placeholder="通过id查找"
+                                                v-model="input"
+                                                @change="getList"
+                                                clearable>
+                                        </el-input>
+                                    </div>
+                                    <div style="margin-left: 310px">
+                                        <el-button type="primary" icon="el-icon-search" circle
+                                                   @click="getList()"></el-button>
+                                    </div>
+                                </div>
                                 <div class="table-responsive">
                                     <el-table
                                             :data="tableData"
@@ -542,6 +556,7 @@
         el: '#app',
 
         data: {
+            input: "",
             dialogTableVisible: false,
             deleteUserForm: {id: "", deleted: ""},
             tableData: [],
@@ -559,6 +574,7 @@
             getList() {
                 param = "?current=" + this.userPagination.current;
                 param += "&pageSize=" + this.userPagination.pageSize;
+                param += "&id=" + this.input;
                 axios.get("/stadium/getPage" + param).then((res) => {
                     this.tableData = res.data.data.list;
                     this.userPagination.total = res.data.data.total;

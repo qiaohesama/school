@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 public class GymUserController {
     private final GymUserService gymUserService;
 
-    @GetMapping("/getAll")
+    @GetMapping("/getPage")
     public R<PageVO<GymUserVO>> getPage(@ModelAttribute GymUserPageQueryBO bo) {
         return R.data(gymUserService.getPage(bo));
     }

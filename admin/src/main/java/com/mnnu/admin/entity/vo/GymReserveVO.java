@@ -3,6 +3,8 @@ package com.mnnu.admin.entity.vo;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableLogic;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import com.mnnu.common.entity.bo.BasePageQueryBO;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -12,7 +14,7 @@ import java.time.LocalDateTime;
 @Data
 public class GymReserveVO extends BasePageQueryBO {
 
-
+    @JsonSerialize(using = ToStringSerializer.class)
     @ApiModelProperty("订单id 时间到秒加上redis自增，前缀为170")
     @TableId("order_id")
     private String orderId;
