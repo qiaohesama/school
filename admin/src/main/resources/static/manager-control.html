@@ -231,9 +231,6 @@
                                             stripe
                                             style="width: 100%"
                                             :row-class-name="tableRowClassName">
-                                        <el-table-column prop="id"
-                                                         label="id"
-                                        >
                                         </el-table-column>
                                         <el-table-column prop="username"
                                                          label="用户名"
@@ -247,7 +244,7 @@
                                             </template>
                                         </el-table-column>
                                         <el-table-column prop="phone"
-                                                         label="电话">
+                                                         label="联系电话">
                                         </el-table-column>
                                         <el-table-column prop="banned"
                                                          label="是否封禁">
@@ -619,6 +616,8 @@
                     } else {
                         this.$message.error("数据同步失败,自动刷新");
                     }
+                }).finally(()=>{
+                    this.getList();
                 })
             },
             handleCurrentChange(current) {

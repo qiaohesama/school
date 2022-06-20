@@ -1,5 +1,6 @@
 package com.mnnu.admin.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.conditions.query.LambdaQueryChainWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.mnnu.admin.entity.bo.GymManagerUserBO;
@@ -20,6 +21,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,6 +29,8 @@ import java.util.List;
 @Slf4j
 @Service
 public class GymManagerUserServiceImpl extends ServiceImpl<GymManagerUserBaseMapper, GymManagerUserDO> implements GymManagerUserService {
+    HttpSession session;
+
     @Override
     public PageVO<GymManagerUserVO> getPage(GymManagerUserBO gymManagerUserBO) {
         LambdaQueryChainWrapper<GymManagerUserDO> wrapper = new LambdaQueryChainWrapper(baseMapper);
@@ -50,10 +54,26 @@ public class GymManagerUserServiceImpl extends ServiceImpl<GymManagerUserBaseMap
 
     @Override
     public void saveManagerUser(GymManagerUserDTO gymManagerUserDTO) {
-        GymManagerUserDO gymManagerUserDO=new GymManagerUserDO();
+        GymManagerUserDO gymManagerUserDO = new GymManagerUserDO();
         BeanUtils.copyProperties(gymManagerUserDTO, gymManagerUserDO);
-        String password= DigestUtils.md5DigestAsHex(gymManagerUserDO.getPassword().getBytes());
+        String password = DigestUtils.md5DigestAsHex(gymManagerUserDO.getPassword().getBytes());
         gymManagerUserDO.setPassword(password);
         this.save(gymManagerUserDO);
+    }
+
+    @Override
+    public Boolean login(GymManagerUserDTO gymManagerUserDTO) {
+        GymManagerUserDO gymManagerUserDO = new GymManagerUserDO();
+        BeanUtils.copyProperties(gymManagerUserDTO, gymManagerUserDO);
+        QueryWrapper<GymManagerUserDO> wrapper = new QueryWrapper<>();
+        gymManagerUserDO.setPassword(DigestUtils.md5DigestAsHex(gymManagerUserDO.getPassword().getBytes()));
+        wrapper.eq("username", gymManagerUserDO.getUsername()).eq("password", gymManagerUserDO.getPassword());
+        GymManagerUserDO one = this.getOne(wrapper);
+        if (one != null) {
+            session.setAttribute("manager", gymManagerUserDO);
+            return true;
+        } else {
+            return false;
+        }
     }
 }

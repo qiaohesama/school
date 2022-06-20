@@ -43,4 +43,8 @@ public class GymManagerUserController {
         gymManagerUserService.saveManagerUser(gymManagerUserDTO);
         return R.success();
     }
+    @PostMapping("/login")
+    public R<Boolean> login(@RequestBody GymManagerUserDTO gymManagerUserDTO){
+        return R.data(gymManagerUserService.login(gymManagerUserDTO));
+    }
 }
