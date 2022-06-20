@@ -220,8 +220,10 @@
                         <div class="panel panel-white">
                             <div class="panel-heading clearfix">
                                 <h4 class="panel-title">管理员设置</h4>
-                                <div style="text-align: left">
+                                <div style="text-align: left" v-if="role===1">
                                     <el-button type="primary" @click="show">新增管理员</el-button>
+                                </div>
+                                <div style="text-align: left" v-else>
                                 </div>
                             </div>
                             <div class="panel-body">
@@ -249,16 +251,30 @@
                                         <el-table-column prop="banned"
                                                          label="是否封禁">
                                             <template slot-scope="scope">
-                                                <div v-if="role===2">
-                                                    <el-switch
-                                                            v-model="scope.row.banned"
-                                                            active-color="#13ce66"
-                                                            inactive-color="#ff4949"
-                                                            :active-value="0"
-                                                            :inactive-value="1"
-                                                            @change="update(scope.row)"
-                                                    >
-                                                    </el-switch>
+                                                <div v-if="role===1">
+                                                    <div v-if="scope.row.role===2">
+                                                        <el-switch
+                                                                v-model="scope.row.banned"
+                                                                active-color="#13ce66"
+                                                                inactive-color="#ff4949"
+                                                                :active-value="0"
+                                                                :inactive-value="1"
+                                                                @change="update(scope.row)"
+                                                        >
+                                                        </el-switch>
+                                                    </div>
+                                                    <div v-else>
+                                                        <el-switch
+                                                                v-model="scope.row.banned"
+                                                                active-color="#13ce66"
+                                                                inactive-color="#ff4949"
+                                                                :active-value="0"
+                                                                :inactive-value="1"
+                                                                @change="update(scope.row)"
+                                                                disabled
+                                                        >
+                                                        </el-switch>
+                                                    </div>
                                                 </div>
                                                 <div v-else>
                                                     <el-switch
@@ -278,12 +294,32 @@
                                         <el-table-column
                                                 prop="createTime"
                                                 label="操作">
+
                                             <template slot-scope="scope">
-                                                <el-button type="danger"
-                                                           @click="deleteManager(scope.row.id)"
-                                                           icon="el-icon-delete"
-                                                           circle size="mini"
-                                                           disabled></el-button>
+                                                <div v-if="role===1">
+                                                    <div v-if="scope.row.role===2">
+                                                    <el-button type="danger"
+                                                               @click="deleteManager(scope.row.id)"
+                                                               icon="el-icon-delete"
+                                                               circle size="mini"
+                                                               ></el-button>
+                                                    </div>
+                                                    <div v-if="scope.row.role===1">
+                                                        <el-button type="danger"
+                                                                   @click="deleteManager(scope.row.id)"
+                                                                   icon="el-icon-delete"
+                                                                   circle size="mini"
+                                                                   disabled
+                                                        ></el-button>
+                                                    </div>
+                                                </div>
+                                                <div v-else>
+                                                    <el-button type="danger"
+                                                               @click="deleteManager(scope.row.id)"
+                                                               icon="el-icon-delete"
+                                                               circle size="mini"
+                                                               disabled></el-button>
+                                                </div>
                                             </template>
                                         </el-table-column>
                                     </el-table>
@@ -530,13 +566,9 @@
         el: '#app',
 
         data: {
+            role: "",
             dialogTableVisible: false,
-            tableData: [{"id": "622", "username": "sb", "createTime": "6666", "status": 0}, {
-                "id": "666",
-                "username": "sb",
-                "createTime": "6666",
-                "status": 3
-            }],
+            tableData: [],
             detail: [],
             userPagination: {//分页相关模型数据
                 current: 1,//当前页码
@@ -561,6 +593,7 @@
         },
         created() {
             this.getList();
+            this.getRole();
         },
         methods: {
             getList() {
@@ -573,8 +606,12 @@
                     this.userPagination.pageSize = res.data.data.pageSize;
                 })
             },
+            getRole() {
+                axios.get("/managerUser/getRole").then((res) => {
+                    this.role = res.data.data
+                })
+            },
             deleteManager(id) {
-                alert("dd")
                 this.$confirm("此操作永久删除当前管理员，是否继续？", "警告", {type: "warning"}).then((res) => {
                     axios.post("/managerUser/delete/" + id).then((res) => {
                         if (res.data.success) {
@@ -616,7 +653,7 @@
                     } else {
                         this.$message.error("数据同步失败,自动刷新");
                     }
-                }).finally(()=>{
+                }).finally(() => {
                     this.getList();
                 })
             },

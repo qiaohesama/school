@@ -47,4 +47,8 @@ public class GymManagerUserController {
     public R<Boolean> login(@RequestBody GymManagerUserDTO gymManagerUserDTO){
         return R.data(gymManagerUserService.login(gymManagerUserDTO));
     }
+    @GetMapping("/getRole")
+    public R<Integer> gerRole(){
+        return R.data(gymManagerUserService.getRole());
+    }
 }

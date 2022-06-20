@@ -70,10 +70,18 @@ public class GymManagerUserServiceImpl extends ServiceImpl<GymManagerUserBaseMap
         wrapper.eq("username", gymManagerUserDO.getUsername()).eq("password", gymManagerUserDO.getPassword());
         GymManagerUserDO one = this.getOne(wrapper);
         if (one != null) {
-            session.setAttribute("manager", gymManagerUserDO);
+            session.setAttribute("manager", one);
             return true;
         } else {
             return false;
         }
+    }
+
+    @Override
+    public Integer getRole() {
+        GymManagerUserDO manager = (GymManagerUserDO)session.getAttribute("manager");
+        Integer role=manager.getRole();
+        System.out.println(role);
+        return role;
     }
 }

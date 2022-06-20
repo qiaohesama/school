@@ -16,4 +16,6 @@ public interface GymManagerUserService extends IService<GymManagerUserDO> {
     void saveManagerUser(GymManagerUserDTO gymManagerUserDTO);
 
     Boolean login(GymManagerUserDTO gymManagerUserDTO);
+
+    Integer getRole();
 }

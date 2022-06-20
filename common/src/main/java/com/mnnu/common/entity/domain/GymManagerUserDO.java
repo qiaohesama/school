@@ -10,6 +10,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 /**
  * <p>
@@ -23,6 +24,7 @@ import lombok.Setter;
 @Setter
 @TableName("gym_manager_user")
 @ApiModel(value = "GymManagerUserDO对象", description = "管理员表")
+@ToString
 public class GymManagerUserDO implements Serializable {
 
     private static final long serialVersionUID = 1L;
