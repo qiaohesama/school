@@ -49,4 +49,12 @@ public class GymReserveVO extends BasePageQueryBO {
 
     @ApiModelProperty("联系方式")
     private String phone;
+
+    @ApiModelProperty("场馆名字")
+    private String venueName;
+
+
+    @ApiModelProperty("场馆限制人数")
+    private Integer limitCount;
+
 }

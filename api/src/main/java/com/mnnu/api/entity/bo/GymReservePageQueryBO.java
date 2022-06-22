@@ -56,4 +56,5 @@ public class GymReservePageQueryBO extends BasePageQueryBO {
 
     @ApiModelProperty("联系方式")
     private String phone;
+
 }

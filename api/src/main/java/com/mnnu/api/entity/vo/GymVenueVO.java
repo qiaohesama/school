@@ -1,6 +1,7 @@
 package com.mnnu.api.entity.vo;
 
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.mnnu.common.entity.bo.BasePageQueryBO;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -11,11 +12,20 @@ import lombok.EqualsAndHashCode;
 @ApiModel("一页订单")
 @EqualsAndHashCode(callSuper = true)
 public class GymVenueVO extends BasePageQueryBO {
+
+    @TableId("id")
+    private Integer id;
+
     @ApiModelProperty("场馆类型 1足球 2羽毛 ")
     private Integer type;
 
     @ApiModelProperty("场馆名字")
     private String name;
+
+
+    @ApiModelProperty("体育馆id")
+    @TableField("stadium_id")
+    private Integer stadiumId;
 
     @ApiModelProperty("预约的价格")
     private Integer price;
@@ -35,4 +45,8 @@ public class GymVenueVO extends BasePageQueryBO {
     @ApiModelProperty("状态 1开启 2闭馆 ")
     @TableField("`status`")
     private Integer status;
+
+    private Long commentNum;
+
+
 }

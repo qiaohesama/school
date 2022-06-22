@@ -1,11 +1,13 @@
 package com.mnnu.api.controller;
 
 import com.mnnu.api.entity.bo.GymReservePageQueryBO;
+import com.mnnu.api.entity.bo.GymUserPageQueryBO;
 import com.mnnu.api.entity.dto.GymReserveDTO;
 import com.mnnu.api.entity.vo.GymReserveVO;
 import com.mnnu.api.service.GymReserveService;
 import com.mnnu.common.common.R;
 import com.mnnu.common.entity.domain.GymStadiumInfoDO;
+import com.mnnu.common.entity.domain.GymUserDO;
 import com.mnnu.common.entity.vo.PageVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -29,9 +31,13 @@ public class GymReserveController {
 
     @ApiOperation("新增一条订单")
     @PostMapping("/save")
-    public R<Void> save(@RequestBody GymReserveDTO gymReserveDTO) {
-        gymReserveService.saveGymReserve(gymReserveDTO);
-        return R.success();
+    public R<Boolean> save(@RequestBody GymReserveDTO gymReserveDTO) {
+        return R.data(gymReserveService.saveGymReserve(gymReserveDTO));
     }
 
+    @ApiOperation("用户获得自身的订单")
+    @GetMapping("/getPage/userId")
+    public R<PageVO<GymReserveVO>> getUserPage(@ModelAttribute GymReservePageQueryBO gymReservePageQueryBO) {
+        return R.data(gymReserveService.listByUserId(gymReservePageQueryBO));
+    }
 }

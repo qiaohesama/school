@@ -11,4 +11,8 @@ public interface GymCommentService extends IService<GymCommentDO> {
     PageVO<GymCommentVO> getPage(GymCommentPageQueryBO bo);
 
     void saveComment(GymCommentDTO gymCommentDTO);
+
+    Long countByVenueId(Integer id);
+
+    Long countByStadiumId(Integer id);
 }

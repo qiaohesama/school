@@ -640,6 +640,19 @@
                 })
             },
             save() {
+                if(this.saveData.userName==""){
+                    this.$message.error("用户名不能为空");
+                    return false
+                }
+                if(this.saveData.password==""){
+                    this.$message.error("密码不能为空");
+                    return false
+                }
+                if(this.saveData.phone==""){
+                    this.$message.error("电话不能为空");
+                    return false
+                }
+
                 axios.post("/managerUser/save", this.saveData).then((res) => {
                     if (res.data.success) {
                         this.$message.success("添加成功");

@@ -15,8 +15,15 @@ import java.time.LocalDateTime;
 @ApiModel("场馆详细信息")
 public class GymVenuePageQueryBO extends GymVenueDO{
 
+    @TableId("id")
+    private Integer id;
+
     @ApiModelProperty("场馆类型 1足球 2羽毛 ")
     private Integer type;
+
+    @ApiModelProperty("体育馆id")
+    @TableField("stadium_id")
+    private Integer stadiumId;
 
     @ApiModelProperty("场馆名字")
     private String name;

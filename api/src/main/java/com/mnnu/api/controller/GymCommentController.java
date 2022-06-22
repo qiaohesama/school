@@ -31,4 +31,5 @@ public class GymCommentController {
         gymCommentService.saveComment(gymCommentDTO);
         return R.success();
     }
+
 }

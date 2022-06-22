@@ -6,7 +6,10 @@ import com.mnnu.api.entity.bo.GymPaymentLogPageQueryBO;
 import com.mnnu.api.entity.bo.GymStadiumPageQueryBO;
 import com.mnnu.api.entity.vo.GymPaymentLogVO;
 import com.mnnu.api.entity.vo.GymReserveVO;
+import com.mnnu.api.entity.vo.GymStadiumInfoVO;
 import com.mnnu.api.entity.vo.GymStadiumVO;
+import com.mnnu.api.service.GymCommentService;
+import com.mnnu.api.service.GymStadiumInfoService;
 import com.mnnu.api.service.GymStadiumService;
 import com.mnnu.common.dao.GymStadiumBaseMapper;
 import com.mnnu.common.entity.domain.GymPaymentLogDO;
@@ -25,6 +28,8 @@ import java.util.List;
 @AllArgsConstructor
 @Slf4j
 public class GymStadiumServiceImpl extends ServiceImpl<GymStadiumBaseMapper, GymStadiumDO> implements GymStadiumService {
+    GymStadiumInfoService gymStadiumInfoService;
+    GymCommentService commentService;
     @Override
     public PageVO<GymStadiumVO> getPage(GymStadiumPageQueryBO bo) {
         LambdaQueryChainWrapper<GymStadiumDO> wrapper = new LambdaQueryChainWrapper<>(baseMapper);
@@ -33,6 +38,9 @@ public class GymStadiumServiceImpl extends ServiceImpl<GymStadiumBaseMapper, Gym
         List<GymStadiumVO> voList = new ArrayList<>();
         for (GymStadiumDO gymStadiumDO : list) {
             GymStadiumVO vo = new GymStadiumVO();
+            vo.setCommentNum(commentService.countByStadiumId(gymStadiumDO.getId()));
+            GymStadiumInfoVO gymStadiumInfoVO = gymStadiumInfoService.getStadiumInfoById(gymStadiumDO.getId());
+            BeanUtils.copyProperties(gymStadiumInfoVO,vo);
             BeanUtils.copyProperties(gymStadiumDO, vo);
             voList.add(vo);
         }

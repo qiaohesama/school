@@ -1,6 +1,8 @@
 package com.mnnu.api.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.mnnu.api.entity.bo.GymUserPageQueryBO;
 import com.mnnu.api.entity.dto.GymUserDTO;
 import com.mnnu.api.entity.vo.GymUserVO;
 import com.mnnu.api.service.GymUserService;
@@ -35,5 +37,32 @@ public class GymUserServiceImpl extends ServiceImpl<GymUserBaseMapper, GymUserDO
         GymUserDO gymUserDO = new GymUserDO();
         BeanUtils.copyProperties(gymUserDTO, gymUserDO);
         this.save(gymUserDO);
+    }
+
+    @Override
+    public GymUserDO login(GymUserPageQueryBO gymUserPageQueryBO) {
+        QueryWrapper<GymUserDO> wrapper=new QueryWrapper<>();
+        wrapper.eq("phone",gymUserPageQueryBO.getPhone());
+        GymUserDO one = this.getOne(wrapper);
+        if(one!=null)
+            return one;
+        else
+            return null;
+    }
+
+    @Override
+    public GymUserDO register(GymUserPageQueryBO gymUserPageQueryBO) {
+        QueryWrapper<GymUserDO> wrapper=new QueryWrapper<>();
+        wrapper.eq("phone",gymUserPageQueryBO.getPhone());
+        GymUserDO one = this.getOne(wrapper);
+        if(one==null) {
+            GymUserDO gymUserDO=new GymUserDO();
+            BeanUtils.copyProperties(gymUserPageQueryBO,gymUserDO);
+            this.save(gymUserDO);
+            return gymUserDO;
+        }
+        else
+            return null;
+
     }
 }

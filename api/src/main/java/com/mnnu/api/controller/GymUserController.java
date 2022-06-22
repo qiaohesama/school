@@ -1,6 +1,7 @@
 package com.mnnu.api.controller;
 
 import com.mnnu.api.entity.bo.GymStadiumInfoPageQueryBO;
+import com.mnnu.api.entity.bo.GymUserPageQueryBO;
 import com.mnnu.api.entity.dto.GymUserDTO;
 import com.mnnu.api.entity.vo.GymStadiumVO;
 import com.mnnu.api.entity.vo.GymUserVO;
@@ -44,5 +45,16 @@ public class GymUserController {
     public R<Void> save(@RequestBody GymUserDTO gymUserDTO) {
         gymUserService.saveUser(gymUserDTO);
         return R.success();
+    }
+
+    @ApiOperation("登录")
+    @PostMapping("/login")
+    public R<GymUserDO> login(@RequestBody GymUserPageQueryBO gymUserPageQueryBO) {
+        return R.data(gymUserService.login(gymUserPageQueryBO));
+    }
+    @ApiOperation("登录")
+    @PostMapping("/register")
+    public R<GymUserDO> register(@RequestBody GymUserPageQueryBO gymUserPageQueryBO) {
+        return R.data(gymUserService.register(gymUserPageQueryBO));
     }
 }

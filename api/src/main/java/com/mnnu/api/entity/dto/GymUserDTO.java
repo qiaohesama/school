@@ -14,6 +14,9 @@ import java.time.LocalDateTime;
 @ApiModel("yeianvj")
 public class GymUserDTO {
 
+    @ApiModelProperty("雪花主键")
+    @TableId("id")
+    private Long id;
 
     @ApiModelProperty("手机号")
     @TableField("phone")
@@ -31,4 +34,5 @@ public class GymUserDTO {
     @TableField("id_num")
     private String idNum;
 
+    private String realName;
 }

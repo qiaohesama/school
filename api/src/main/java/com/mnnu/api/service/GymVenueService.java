@@ -5,6 +5,9 @@ import com.mnnu.api.entity.vo.GymVenueVO;
 import com.mnnu.common.entity.domain.GymStadiumDO;
 import com.mnnu.common.entity.domain.GymVenueDO;
 
+import java.util.List;
+
 public interface GymVenueService  extends IService<GymVenueDO> {
-    GymVenueVO getVenueById(int id);
+    List<GymVenueVO> getVenueById(int id);
+
 }

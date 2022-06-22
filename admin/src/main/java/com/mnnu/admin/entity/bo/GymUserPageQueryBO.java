@@ -1,5 +1,6 @@
 package com.mnnu.admin.entity.bo;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableLogic;
@@ -23,7 +24,6 @@ public class GymUserPageQueryBO extends BasePageQueryBO {
 
     @JsonSerialize(using = ToStringSerializer.class)
     @ApiModelProperty("雪花主键")
-    @TableId("id")
     private Long id;
 
     @ApiModelProperty("手机号")
